@@ -5,8 +5,8 @@ def error_message_detail(message, error_detail:sys):
     _, _, exe_tb = error_detail.exc_info()  
     file_name = exe_tb.tb_frame.f_code.co_filename
     line_no = exe_tb.tb_lineno
-    error_message = f"Error occured in script name {file_name} \
-        line number {line_no} error message {str(message)}"
+    error_message = f"Error occured in script name: {file_name} \
+        \n Line Number: {line_no}\n Error Message: {str(message)}"
 
     return error_message
 
@@ -17,3 +17,9 @@ class CustomException(Exception):
 
     def __str__(self) -> str:
         return self.error_message
+        
+if __name__ == "__main__":
+    try:
+        a = 1 / 0
+    except Exception as e:
+        raise CustomException(e, sys)
