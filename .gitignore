@@ -119,6 +119,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# Ignore some folders
+logs/*
+
 # Environments
 .env
 .venv
