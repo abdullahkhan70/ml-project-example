@@ -121,6 +121,7 @@ celerybeat.pid
 
 # Ignore some folders
 logs/*
+artifacts
 
 # Environments
 .env
