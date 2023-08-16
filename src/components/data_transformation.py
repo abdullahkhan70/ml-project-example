@@ -75,7 +75,7 @@ class DataTransformation:
 
                 save_object(
                     file_path = self.data_transformation_config.preprocessor_object_file_path,
-                    object = preprocessor_object
+                    objects = preprocessor_object
                 )
 
                 return(
