@@ -2,7 +2,7 @@ import os, sys
 from dataclasses import dataclass
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import save_object
+from src.utils import save_object, get_params
 import pandas as pd
 from catboost import CatBoostRegressor
 from sklearn.ensemble import(
@@ -11,7 +11,7 @@ from sklearn.ensemble import(
     RandomForestRegressor
 )
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
@@ -43,21 +43,30 @@ class ModelTrainer:
             )
 
             models = {
-                "random_forest": RandomForestRegressor(verbose=False),
+                "random_forest": RandomForestRegressor(),
                 "decision_tree": DecisionTreeRegressor(),
-                "gradient_boosting": GradientBoostingRegressor(verbose=False),
+                "gradient_boosting": GradientBoostingRegressor(),
                 "linear_regression": LinearRegression(),
                 "k_neighbour": KNeighborsRegressor(),
                 "xgb_regressor": XGBRegressor(),
-                "catboosting_regressor": CatBoostRegressor(verbose=False),
+                "catboosting_regressor": CatBoostRegressor(),
                 "adaboost_regressor": AdaBoostRegressor()
             }
+
+            params = get_params()
 
             model_list:dict = {}
             r2_score_list = []
 
             for i in range(len(list(models))):
                 model = list(models.values())[i]
+                param = params[list(models.keys())[i]]
+
+                # GridSearchCV
+                grid_search = GridSearchCV(model, param, cv=3)
+                grid_search.fit(X_train, y_train)
+                
+                model.set_params(**grid_search.best_params_)
                 model.fit(X_train, y_train)
 
                 # Make Predictations.
