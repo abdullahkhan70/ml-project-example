@@ -28,9 +28,9 @@ class ModelTrainer:
 
     def evaluate_model(self, true, predict):
         r2_scores = r2_score(true, predict)
-        return r2_score
+        return r2_scores
 
-    def initiate_model_trainer(self, train_arr, test_arr, preprocessor_path):
+    def initiate_model_trainer(self, train_arr: list, test_arr: list, preprocessor_path):
         try:
             logging.info(f"Spliting training and test datasets!")
             # X_train, y_train, X_test, y_test = train_test_split(train_arr, test_arr, test_size=0.3, random_state=42)
@@ -41,7 +41,6 @@ class ModelTrainer:
                 test_arr[:,:-1],
                 test_arr[:,-1]
             )
-
 
             models = {
                 "random_forest": RandomForestRegressor(verbose=False),
@@ -87,7 +86,7 @@ class ModelTrainer:
             # if best_model_score < 0.6:
             #     raise CustomException("No best model found yet. Please, change the hyperparameters values of the models.", sys)
 
-            logging.info(f"Bets Model found: {best_model}")
+            logging.info(f"Best Model found: {best_model}")
 
             """
             We can load our preprocessing pickle file for getting better results w.r.t to upcoming any new data, 
