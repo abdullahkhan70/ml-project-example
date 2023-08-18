@@ -60,13 +60,13 @@ class ModelTrainer:
 
             for i in range(len(list(models))):
                 model = list(models.values())[i]
-                param = params[list(models.keys())[i]]
+                # param = params[list(models.keys())[i]]
 
                 # GridSearchCV
-                grid_search = GridSearchCV(model, param, cv=3)
-                grid_search.fit(X_train, y_train)
+                # grid_search = GridSearchCV(model, param, cv=3)
+                # grid_search.fit(X_train, y_train)
                 
-                model.set_params(**grid_search.best_params_)
+                # model.set_params(**grid_search.best_params_)
                 model.fit(X_train, y_train)
 
                 # Make Predictations.

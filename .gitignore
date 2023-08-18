@@ -121,7 +121,7 @@ celerybeat.pid
 
 # Ignore some folders
 logs/*
-artifacts
+# artifacts
 catboost_info
 
 # Environments

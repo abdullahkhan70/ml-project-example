@@ -31,7 +31,7 @@ class DataTransformation:
             logging.info("Numerical and Categorical for Standard Scalar and One Hot Encoder is completed")
             logging.info(f"Numerical Columns: {numerical_pipeline}")
             logging.info(f"Categorical Columns: {categorical_pipeline}")
-            preprocessor = ColumnTransformer([
+            preprocessor = ColumnTransformer(transformers=[
                 ("numerical_pipeline", numerical_pipeline, numerical_features),
                 ("categorical_pipeline", categorical_pipeline, categorical_features)
             ])

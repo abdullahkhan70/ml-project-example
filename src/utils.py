@@ -17,6 +17,18 @@ def save_object(file_path: str, objects):
     except Exception as error:
         raise CustomException(error, sys)
 
+def load_object(model_path: str):
+    try:
+        dir_path = os.path.dirname(model_path)
+        print(f"Model Path: {dir_path}")
+
+        with open(model_path, "rb") as file_obj:
+            data = dill.load(file=file_obj)
+        return data
+        
+    except Exception as error:
+        raise CustomException(error, sys)
+
 def get_params():
     params = {
         "random_forest": {
